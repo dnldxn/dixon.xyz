@@ -9,16 +9,33 @@ jobs:
         uses: actions/checkout@master
         with:
           submodules: recursive  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 1    # Fetch all history for .GitInfo and .Lastmod
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.89.4'
           extended: true
 
-      - name: Build
-        run: hugo --minify --gc --environment production
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: npm ci
+      - run: hugo --minify --gc --environment production
+
+      # - name: Build
+      #   run: npm ci
+      #   run: hugo --minify --gc --environment production
 
       - name: Deploy site
         run: hugo deploy --force --maxDeletes -1 --invalidateCDN

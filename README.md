@@ -15,5 +15,5 @@ This was a quick weekend project to update my existing site.
 ## Dev
 
 ```bash
-docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.83.1-ext-alpine shell
+docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.89.4-ext-alpine shell
 ```
