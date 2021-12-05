@@ -1,0 +1,28 @@
+name: Hugo S3
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out code from Master
+        uses: actions/checkout@master
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build
+        run: hugo --minify --gc --environment production
+
+      - name: Deploy site
+        run: hugo deploy --force --maxDeletes -1 --invalidateCDN
+        env:
+          AWS_REGION: 'us-west-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
