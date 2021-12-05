@@ -1,0 +1,50 @@
+---
+title: Home
+linkTitle: Home
+menu:
+  main:
+    weight: 10
+---
+
+{{< blocks/cover title="Hi I'm Daniel Dixon" image_anchor="top" height="full" color="primary" >}}
+
+<h3 style="margin-top: -2rem;">Senior Data Engineer</h3>
+
+<img src="face.jpg" class="rounded-circle my-4" height="240px" width="240px" style="border: 3px solid white;"/>
+
+<div class="mx-auto my-4">
+	<a class="btn btn-lg btn-primary mr-3 mb-4" href="https://www.linkedin.com/in/danielbdixon/">
+		LinkedIn <i class="fab fa-linkedin ml-2"></i>
+	</a>
+	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/dnldxn">
+		Github <i class="fab fa-github ml-2 "></i>
+	</a>
+	<a class="btn btn-lg btn-success mr-3 mb-4" href="{{< relref "/about" >}}">
+		Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+	</a>
+</div>
+
+{{< blocks/link-down color="info" >}}
+
+{{< /blocks/cover >}}
+
+
+{{% blocks/lead color="primary" %}}
+Hi, I'm Daniel.  I'm Senior Data Engineer with a focus on Big Data, AI/ML, and Streaming use cases.
+{{% /blocks/lead %}}
+
+
+{{< blocks/section color="dark" >}}
+
+{{% blocks/feature icon="fa-lightbulb" title="About Me" url="/about" %}}
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fab fa-github" title="Checkout my Github Profile!" url="https://github.com/dnldxn" %}}
+We do a [Pull Request](https://github.com/google/docsy-example/pulls) contributions workflow on **GitHub**. New users are always welcome!
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fab fa-linkedin" title="Follow me on LinkedIn!" url="https://www.linkedin.com/in/danielbdixon/" %}}
+For announcement of latest features etc.
+{{% /blocks/feature %}}
+
+{{< /blocks/section >}}
