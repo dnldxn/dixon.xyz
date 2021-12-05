@@ -188,3 +188,23 @@ enable = false
 	url = "mailto:daniel@dixon.xyz"
 	icon = "fa fa-envelope"
         desc = "Send me an Email!"
+
+
+[deployment]
+
+[[deployment.targets]]
+name = "dixon.com"
+URL = "s3://dixon.xyz?region=us-west-2"
+
+# If you are using a CloudFront CDN, deploy will invalidate the cache as needed.
+#cloudFrontDistributionID =	"[CLOUDFRONT_DIST_ID]"
+
+[[deployment.matchers]]
+# Cache static assets for 20 years.
+pattern = "^.+\\.(js|css|png|jpg|gif|svg|ttf)$"
+cacheControl = "max-age=630720000, no-transform, public"
+gzip = true
+
+[[deployment.matchers]]
+pattern = "^.+\\.(html|xml|json)$"
+gzip = true
