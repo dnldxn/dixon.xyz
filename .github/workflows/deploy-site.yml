@@ -33,11 +33,7 @@ jobs:
       - run: npm ci
       - run: hugo --minify --gc --environment production
 
-      # - name: Build
-      #   run: npm ci
-      #   run: hugo --minify --gc --environment production
-
-      - name: Deploy site
+      - name: Deploy to S3
         run: hugo deploy --force --maxDeletes -1 --invalidateCDN
         env:
           AWS_REGION: 'us-west-2'
