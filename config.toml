@@ -82,6 +82,8 @@ section = ["HTML", "print", "RSS"]
 
 [params]
 
+copyright = "Daniel Dixon"
+
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
 
@@ -134,7 +136,7 @@ prism_syntax_highlighting = false
 breadcrumb_disable = false
 
 # Set to true to disable the About link in the site footer
-footer_about_disable = false
+footer_about_disable = true
 # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
 navbar_logo = false
 
