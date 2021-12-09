@@ -196,10 +196,7 @@ enable = false
 
 [[deployment.targets]]
 name = "dixon.com"
-URL = "s3://dixon.xyz?region=us-west-2"
-
-# If you are using a CloudFront CDN, deploy will invalidate the cache as needed.
-#cloudFrontDistributionID =	"[CLOUDFRONT_DIST_ID]"
+URL = "s3://daniel.dixon.xyz?region=us-west-2"
 
 [[deployment.matchers]]
 # Cache static assets for 20 years.
