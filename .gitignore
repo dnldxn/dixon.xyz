@@ -1,4 +1,30 @@
+
+
+### Hugo ###
+# Generated files by hugo
 /public
-resources/
+/resources/_gen/
+
+# Use by Hugo themes
 node_modules/
-terraform.tfstate
+
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+### OS Files ###
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# OSX
+.DS_Store

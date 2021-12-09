@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.27"
     }
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
   }
 
   required_version = ">= 0.14.9"
@@ -17,6 +21,7 @@ provider "aws" {
 # Create some variables
 locals {
   domain_name = "dixon.xyz"
+  cloudflare_zone_id = "7cb6e61582b82a97ff6e72f48b608988"
 }
 
 # Create main bucket to hold website contents
@@ -75,12 +80,60 @@ resource "aws_s3_bucket" "root" {
     EOF
 }
 
-# AWS S3 bucket for www-redirect
-resource "aws_s3_bucket" "website_redirect" {
-  bucket  = "www.${local.domain_name}"
-  acl     = "public-read"
+# Create Cloudflare records
+resource "cloudflare_record" "dixon_xyz" {
+  zone_id = local.cloudflare_zone_id
+  name    = "dixon.xyz"
+  value   = "${local.domain_name}.s3-website-us-west-2.amazonaws.com"
+  type    = "CNAME"
+  ttl     = "1"
+  proxied = true
+}
 
-  website {
-    redirect_all_requests_to = local.domain_name
+resource "cloudflare_record" "www" {
+  zone_id = local.cloudflare_zone_id
+  name    = "www"
+  value   = "${local.domain_name}.s3-website-us-west-2.amazonaws.com"
+  type    = "CNAME"
+  ttl     = "1"
+  proxied = true
+}
+
+resource "cloudflare_record" "daniel" {
+  zone_id = local.cloudflare_zone_id
+  name    = "daniel"
+  value   = "${local.domain_name}.s3-website-us-west-2.amazonaws.com"
+  type    = "CNAME"
+  ttl     = "1"
+  proxied = true
+}
+
+resource "cloudflare_record" "www_daniel" {
+  zone_id = local.cloudflare_zone_id
+  name    = "www.daniel"
+  value   = "${local.domain_name}.s3-website-us-west-2.amazonaws.com"
+  type    = "CNAME"
+  ttl     = "1"
+  proxied = true
+}
+
+# Create a page rule to redirect all requests to https://domain.xyz
+resource "cloudflare_page_rule" "www" {
+  zone_id = local.cloudflare_zone_id
+  target = "http://*${local.domain_name}/"
+  priority = 1
+
+  actions {
+    # ssl = "flexible"
+    # email_obfuscation = "on"
+    # minify {
+    #   html = "off"
+    #   css  = "on"
+    #   js   = "on"
+    # }
+    forwarding_url {
+      url = "https://${local.domain_name}"
+      status_code = 301
+    }
   }
 }
