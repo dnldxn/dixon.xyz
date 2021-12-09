@@ -27,7 +27,7 @@ docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.89.4-ext-alpine s
 - Setup and authenticate the AWS CLI
 - Create CloudFlare API token from the web UI.  Give the token the least amount of permission:
     - **Token name**: Terraform
-    - **Permissions**:  `Zone:DNS:Edit`, `Zone:Page Rules:Edit`
+    - **Permissions**:  `Zone:DNS:Edit`, `Zone:Page Rules:Edit`, `Zone:Zone Settings:Edit`
     - **Zone Resources**:  `Include:Specific zone:YOUR DOMAIN`
     - **Client IP Address Filtering**:  `Is in:YOUR IP ADDRESS`
     - **TTL**:  `TODAY -> TOMORROW`

@@ -124,16 +124,26 @@ resource "cloudflare_page_rule" "www" {
   priority = 1
 
   actions {
-    # ssl = "flexible"
-    # email_obfuscation = "on"
-    # minify {
-    #   html = "off"
-    #   css  = "on"
-    #   js   = "on"
-    # }
     forwarding_url {
       url = "https://${local.domain_name}"
       status_code = 301
+    }
+  }
+}
+
+# 
+resource "cloudflare_zone_settings_override" "zone_settings_override" {
+  zone_id = local.cloudflare_zone_id
+  settings {
+    always_online = "on"  # Keep your website online for visitors when your origin server is unavailable
+    browser_check = "on"  # Evaluate HTTP headers from your visitors browser for threats. If a threat is found a block page will be delivered
+    ssl = "flexible"  # Encrypts traffic between the browser and Cloudflare
+    brotli = "on"  # Speed up page load times for your visitor's HTTPS traffic by applying Brotli compression
+    security_level = "high"  # Adjust website's Security Level to determine which visitors will receive a challenge page
+    minify {
+      css = "on"
+      js = "on"
+      html = "on"
     }
   }
 }
