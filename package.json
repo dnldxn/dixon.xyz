@@ -10,7 +10,7 @@
   "license": "ISC",
   "homepage": "https://github.com/dnldxn/dixon.xyz#readme",
   "devDependencies": {
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.9",
     "postcss": "^8.3.7",
     "postcss-cli": "^9.0.2"
   }
